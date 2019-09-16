@@ -1,0 +1,5 @@
+language: minimal
+before_script:
+  - curl -fsSL https://deno.land/x/install/install.sh | sh
+script:
+  - deno test datum.ts
