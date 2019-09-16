@@ -136,6 +136,34 @@ export class Datum {
       (this.year === other.year && this.month === other.month && this.day > other.day);
   }
 
+  /*
+   * for sorting an array of datums in ascending order like so:
+   * `arrayOfDatums.sort(Datum.compareAsc)`
+   */
+  static compareAsc(first: Datum, second: Datum): number {
+    if (first.isBefore(second)) {
+      return -1;
+    } else if (first.isAfter(second)) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  /*
+   * for sorting an array of datums in descending order like so:
+   * `arrayOfDatums.sort(Datum.compareDesc)`
+   */
+  static compareDesc(first: Datum, second: Datum): number {
+    if (first.isBefore(second)) {
+      return 1;
+    } else if (first.isAfter(second)) {
+      return -1;
+    } else {
+      return 0;
+    }
+  }
+
   public addDays(days: number): Datum {
     assert(Number.isInteger(days), "days must be an integer");
     assert(0 <= days, "day must be positive");
@@ -397,3 +425,63 @@ test(function testWeekday() {
   assertEquals(new Datum(1373, 10, 11).weekday(), Weekday.Monday);
   assertEquals(new Datum(5159, 4, 22).weekday(), Weekday.Wednesday);
 })
+
+test(function testCompareAsc() {
+  const dates = [
+    new Datum(2019, 8, 29),
+    new Datum(1373, 10, 11),
+    new Datum(2019, 8, 30),
+    new Datum(2019, 8, 31),
+    new Datum(1988, 9, 11),
+    new Datum(3994, 2, 8),
+    new Datum(1997, 12, 20),
+    new Datum(2019, 8, 28),
+    new Datum(5159, 4, 22),
+    new Datum(2019, 8, 27),
+    new Datum(2019, 9, 1),
+  ];
+  dates.sort(Datum.compareAsc);
+
+  assert(dates[0].isEqual(new Datum(1373, 10, 11)));
+  assert(dates[1].isEqual(new Datum(1988, 9, 11)));
+  assert(dates[2].isEqual(new Datum(1997, 12, 20)));
+  assert(dates[3].isEqual(new Datum(2019, 8, 27)));
+  assert(dates[4].isEqual(new Datum(2019, 8, 28)));
+  assert(dates[5].isEqual(new Datum(2019, 8, 29)));
+  assert(dates[6].isEqual(new Datum(2019, 8, 30)));
+  assert(dates[7].isEqual(new Datum(2019, 8, 31)));
+  assert(dates[8].isEqual(new Datum(2019, 9, 1)));
+  assert(dates[9].isEqual(new Datum(3994, 2, 8)));
+  assert(dates[10].isEqual(new Datum(5159, 4, 22)));
+  assert(dates[11] == null);
+});
+
+test(function testCompareDesc() {
+  const dates = [
+    new Datum(2019, 8, 29),
+    new Datum(1373, 10, 11),
+    new Datum(2019, 8, 30),
+    new Datum(2019, 8, 31),
+    new Datum(1988, 9, 11),
+    new Datum(3994, 2, 8),
+    new Datum(1997, 12, 20),
+    new Datum(2019, 8, 28),
+    new Datum(5159, 4, 22),
+    new Datum(2019, 8, 27),
+    new Datum(2019, 9, 1),
+  ];
+  dates.sort(Datum.compareDesc);
+
+  assert(dates[0].isEqual(new Datum(5159, 4, 22)));
+  assert(dates[1].isEqual(new Datum(3994, 2, 8)));
+  assert(dates[2].isEqual(new Datum(2019, 9, 1)));
+  assert(dates[3].isEqual(new Datum(2019, 8, 31)));
+  assert(dates[4].isEqual(new Datum(2019, 8, 30)));
+  assert(dates[5].isEqual(new Datum(2019, 8, 29)));
+  assert(dates[6].isEqual(new Datum(2019, 8, 28)));
+  assert(dates[7].isEqual(new Datum(2019, 8, 27)));
+  assert(dates[8].isEqual(new Datum(1997, 12, 20)));
+  assert(dates[9].isEqual(new Datum(1988, 9, 11)));
+  assert(dates[10].isEqual(new Datum(1373, 10, 11)));
+  assert(dates[11] == null);
+});
