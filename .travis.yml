@@ -1,7 +1,7 @@
 language: minimal
 before_script:
   - curl -fsSL https://deno.land/x/install/install.sh | sh
-  - echo "export DENO_INSTALL="/home/travis/.deno" >> $HOME/.bash_profile
-  - echo "export PATH="$DENO_INSTALL/bin:$PATH" >> $HOME/.bash_profile
+  - echo export DENO_INSTALL="/home/travis/.deno" >> $HOME/.bash_profile
+  - echo export PATH="$DENO_INSTALL/bin:$PATH" >> $HOME/.bash_profile
 script:
   - deno test datum.ts
