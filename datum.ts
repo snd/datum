@@ -137,6 +137,32 @@ export class Datum {
   }
 
   /*
+   * returns the minimum (earliest) Datum in an Iterable
+   */
+  static min(datums: Iterable<Datum>): Datum | null {
+    let min = null;
+    for (const datum of datums) {
+      if (min == null || datum.isBefore(min)) {
+        min = datum;
+      }
+    }
+    return min;
+  }
+
+  /*
+   * returns the maximum (latest) Datum in an Iterable
+   */
+  static max(datums: Iterable<Datum>): Datum | null {
+    let max = null;
+    for (const datum of datums) {
+      if (max == null || datum.isAfter(max)) {
+        max = datum;
+      }
+    }
+    return max;
+  }
+
+  /*
    * for sorting an array of datums in ascending order like so:
    * `arrayOfDatums.sort(Datum.compareAsc)`
    */
@@ -484,4 +510,38 @@ test(function testCompareDesc() {
   assert(dates[9].isEqual(new Datum(1988, 9, 11)));
   assert(dates[10].isEqual(new Datum(1373, 10, 11)));
   assert(dates[11] == null);
+});
+
+test(function testMin() {
+  const dates = [
+    new Datum(2019, 8, 29),
+    new Datum(1373, 10, 11),
+    new Datum(2019, 8, 30),
+    new Datum(2019, 8, 31),
+    new Datum(1988, 9, 11),
+    new Datum(3994, 2, 8),
+    new Datum(1997, 12, 20),
+    new Datum(2019, 8, 28),
+    new Datum(5159, 4, 22),
+    new Datum(2019, 8, 27),
+    new Datum(2019, 9, 1),
+  ];
+  assert(Datum.min(dates).isEqual(new Datum(1373, 10, 11)));
+});
+
+test(function testMax() {
+  const dates = [
+    new Datum(2019, 8, 29),
+    new Datum(1373, 10, 11),
+    new Datum(2019, 8, 30),
+    new Datum(2019, 8, 31),
+    new Datum(1988, 9, 11),
+    new Datum(3994, 2, 8),
+    new Datum(1997, 12, 20),
+    new Datum(2019, 8, 28),
+    new Datum(5159, 4, 22),
+    new Datum(2019, 8, 27),
+    new Datum(2019, 9, 1),
+  ];
+  assert(Datum.max(dates).isEqual(new Datum(5159, 4, 22)));
 });
