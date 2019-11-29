@@ -1,0 +1,24 @@
+{
+  "name": "datum",
+  "version": "1.0.0",
+  "description": "minimalist date arithmetic for deno. year, month, day only. no time. no timezones",
+  "homepage": "http://github.com/snd/datum",
+  "bugs": {
+    "url": "http://github.com/snd/datum/issues",
+    "email": "kruemaxi@gmail.com"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Maximilian Krüger",
+    "email": "kruemaxi@gmail.com",
+    "url": "http://github.com/snd"
+  },
+  "main": "datum.ts",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/snd/datum.git"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "sideEffects": false
+}
