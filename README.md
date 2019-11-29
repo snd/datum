@@ -7,7 +7,7 @@ minimalist date arithmetic for deno. year, month, day only. no time. no timezone
 > because i needed to do date arithmetic without wanting to work around
 > the complexities of leap seconds and timezones of other datetime libraries.
 
-for full documentation read [the source](datum.ts). it's under 300 LOC.
+for full documentation read [the source](datum.ts). it's under 400 LOC.
 
 [example.ts](example.ts):
 ```typescript
