@@ -2,5 +2,5 @@ language: minimal
 before_script:
   - curl -fsSL https://deno.land/x/install/install.sh | sh
 script:
-  - /home/travis/.deno/bin/deno test --allow-net datum.ts
+  - /home/travis/.deno/bin/deno test --allow-net test.ts
   - /home/travis/.deno/bin/deno example.ts

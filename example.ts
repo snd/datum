@@ -1,3 +1,5 @@
+#!/usr/bin/env deno
+
 import { assert, assertEquals } from "https://deno.land/std/testing/asserts.ts";
 
 // import Datum type
