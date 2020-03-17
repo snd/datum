@@ -79,6 +79,17 @@ test(function testAddDays() {
   assertEquals([2037, 4, 18], new Datum(2030, 6, 15).addDays(2499).toTuple());
 })
 
+test(function testSubtractDays() {
+  assertEquals([2029, 1, 1], new Datum(2029, 1, 1).subtractDays(0).toTuple());
+  assertEquals([2028, 12, 31], new Datum(2029, 1, 1).subtractDays(1).toTuple());
+  assertEquals([2028, 12, 30], new Datum(2029, 1, 1).subtractDays(2).toTuple());
+
+  assertEquals([2020, 2, 29], new Datum(2020, 3, 16).subtractDays(16).toTuple());
+
+  assertEquals([2028, 5, 29], new Datum(2028, 10, 9).subtractDays(133).toTuple());
+  assertEquals([2030, 6, 15], new Datum(2037, 4, 18).subtractDays(2499).toTuple());
+})
+
 test(function testDaysUntilFirstDayOfNextMonth() {
   assertEquals(new Datum(2019, 7, 22).daysUntilFirstDayOfNextMonth(), 10);
   assertEquals(new Datum(2019, 7, 31).daysUntilFirstDayOfNextMonth(), 1);

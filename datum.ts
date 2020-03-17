@@ -221,6 +221,40 @@ export class Datum {
     }
   }
 
+  public subtractDays(days: number): Datum {
+    if (!Number.isInteger(days)) {
+      throw new TypeError("`days` argument must be an integer");
+    }
+    if (0 > days) {
+      throw new RangeError(`\`days\` argument must be positive or 0 but is ${days}`);
+    }
+
+    // this will move down to 0
+    let daysToSubtract = days;
+
+    // this will move into the past
+    let current: Datum = this;
+
+    while (true) {
+      const daysSincePreviousMonth = current.day;
+
+      if (daysToSubtract < daysSincePreviousMonth) {
+        return new Datum(current.year, current.month, current.day - daysToSubtract);
+      }
+
+      // move to last day of previous month
+
+      daysToSubtract -= daysSincePreviousMonth;
+      if (current.month === 1) {
+        const lastDayInPreviousMonth = Datum.getDaysInMonth(current.year - 1, 12);
+        current = new Datum(current.year - 1, 12, lastDayInPreviousMonth);
+      } else {
+        const lastDayInPreviousMonth = Datum.getDaysInMonth(current.year, current.month - 1);
+        current = new Datum(current.year, current.month - 1, lastDayInPreviousMonth);
+      }
+    }
+  }
+
   /*
    * returns the difference in days between this date and `other`.
    * always returns a positive number.
