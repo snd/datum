@@ -340,6 +340,7 @@ export class Datum {
         case 2: return Weekday.Saturday;
         case 1: return Weekday.Sunday;
         case 0: return Weekday.Monday;
+        default: throw new Error("invariant failed. this is a bug. please report it at https://github.com/snd/datum/issues");
       };
     } else {
       switch (weekdayIndex) {
@@ -350,6 +351,7 @@ export class Datum {
         case 4: return Weekday.Friday;
         case 5: return Weekday.Saturday;
         case 6: return Weekday.Sunday;
+        default: throw new Error("invariant failed. this is a bug. please report it at https://github.com/snd/datum/issues");
       };
     }
   }

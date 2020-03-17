@@ -202,7 +202,8 @@ Deno.test(function testMin() {
     new Datum(2019, 8, 27),
     new Datum(2019, 9, 1),
   ];
-  assert(Datum.min(dates).isEqual(new Datum(1373, 10, 11)));
+  const min = Datum.min(dates);
+  assert(min != null && min.isEqual(new Datum(1373, 10, 11)));
 });
 
 Deno.test(function testMax() {
@@ -219,5 +220,6 @@ Deno.test(function testMax() {
     new Datum(2019, 8, 27),
     new Datum(2019, 9, 1),
   ];
-  assert(Datum.max(dates).isEqual(new Datum(5159, 4, 22)));
+  const max = Datum.max(dates);
+  assert(max != null && max.isEqual(new Datum(5159, 4, 22)));
 });
